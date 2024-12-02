@@ -1316,6 +1316,14 @@
                                 this &lt;xccdf:Rule&gt;.</xsd:documentation>
                         </xsd:annotation>
                     </xsd:element>
+                    <xsd:element name="checktext" type="cdf:checkTextType" minOccurs="0"
+                        maxOccurs="unbounded">
+                        <xsd:annotation>
+                            <xsd:documentation xml:lang="en">Data that describes how to assess a
+                                target system for compliance with this
+                                &lt;xccdf:Rule&gt;.</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
                     <xsd:choice>
                         <xsd:element name="check" type="cdf:checkType" minOccurs="0"
                             maxOccurs="unbounded">
@@ -1508,6 +1516,32 @@
         </xsd:restriction>
     </xsd:simpleType>
 
+    <xsd:complexType name="checkTextType" mixed="true">
+        <xsd:annotation>
+            <xsd:documentation xml:lang="en"> Data type for the &lt;xccdf:checktext&gt; element, which
+                contains data that describes how to assess a target system for compliance with an
+                &lt;xccdf:Rule&gt;. Each &lt;xccdf:checktext&gt; element may be associated with one or
+                more &lt;xccdf:check&gt; elements through the @checkref attribute. The body holds
+                explanatory text about the check procedures.</xsd:documentation>
+        </xsd:annotation>
+        <xsd:complexContent>
+            <xsd:extension base="cdf:htmlTextWithSubType">
+                <xsd:attribute name="checkref" type="xsd:NCName" use="optional">
+                    <xsd:annotation>
+                        <xsd:documentation xml:lang="en">A reference to the @id of an
+                            &lt;xccdf:check&gt; element. </xsd:documentation>
+                    </xsd:annotation>
+                </xsd:attribute>
+                <xsd:attribute name="complexity" type="cdf:ratingEnumType" use="optional"
+                    default="unknown">
+                    <xsd:annotation>
+                        <xsd:documentation xml:lang="en">The estimated complexity or difficulty of
+                            applying the check to the target. </xsd:documentation>
+                    </xsd:annotation>
+                </xsd:attribute>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
 
     <xsd:complexType name="fixTextType" mixed="true">
         <xsd:annotation>
