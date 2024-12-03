@@ -359,11 +359,6 @@
             <sch:assert flag="WARNING" test="false()">Warning: Deprecated behavior of @abstract attribute set to 'true' found within 'Group' element.  See the XCCDF 1.2.1 specification, Sections 6.4.1 and A.4.</sch:assert>
         </sch:rule>
     </sch:pattern>
-    <sch:pattern id="benchmark_rule_deprecated_impact_metric">
-        <sch:rule context="xccdf:Rule[xccdf:impact-metric]">
-            <sch:assert flag="WARNING" test="false()">Warning: Deprecated 'impact-metric' element found within a 'Rule' element. See the XCCDF 1.2.1 specification, Sections 6.4.4.2 and A.4.</sch:assert>
-        </sch:rule>
-    </sch:pattern>
     <!-- ************************************************************** -->
     <!-- ***************  Rules for Tailoring Elements  *************** -->
     <!-- ************************************************************** -->
