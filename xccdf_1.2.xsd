@@ -1505,6 +1505,18 @@
                         dependencies</xsd:documentation>
                 </xsd:annotation>
             </xsd:enumeration>
+            <xsd:enumeration value="false positive">
+                <xsd:annotation>
+                    <xsd:documentation xml:lang="en">Warning about the potential for false positive 
+                    results from a check procedure, including known causes</xsd:documentation>
+                </xsd:annotation>
+            </xsd:enumeration>
+            <xsd:enumeration value="false negative">
+                <xsd:annotation>
+                    <xsd:documentation xml:lang="en">Warning about the potential for false negative 
+                    results from a check procedure, including known causes</xsd:documentation>
+                </xsd:annotation>
+            </xsd:enumeration>
         </xsd:restriction>
     </xsd:simpleType>
 
@@ -1885,6 +1897,17 @@ NOT || P | F | U | E | N | K | S | I ||
             </xsd:appinfo>
         </xsd:annotation>
         <xsd:sequence>
+            <xsd:element name="warning" type="cdf:warningType" minOccurs="0" maxOccurs="unbounded">
+                <xsd:annotation>
+                    <xsd:documentation xml:lang="en">A note or caveat about the item intended to
+                        convey important cautionary information for the &lt;xccdf:Benchmark&gt; user
+                        (e.g., “This check may return a false positive on standalone systems.”). If
+                        multiple &lt;xccdf:warning&gt; elements appear, benchmark
+                        consumers should concatenate them for generating reports or documents.
+                        Benchmark consumers may present this information in a special manner in
+                        generated documents.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
             <xsd:element name="check-import" type="cdf:checkImportType" minOccurs="0"
                 maxOccurs="unbounded">
                 <xsd:annotation>
@@ -2631,6 +2654,18 @@ NOT || P | F | U | E | N | K | S | I ||
                 <xsd:annotation>
                     <xsd:documentation xml:lang="en">Text that describes the &lt;xccdf:Profile&gt;.
                     </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="warning" type="cdf:warningType" minOccurs="0" maxOccurs="unbounded">
+                <xsd:annotation>
+                    <xsd:documentation xml:lang="en">A note or caveat about the item intended to
+                        convey important cautionary information for the &lt;xccdf:Benchmark&gt; user
+                        (e.g., “This profile is only intended for use on standalone systems. Use on 
+                        other systems will result in incomplete assessment.”). If multiple 
+                        &lt;xccdf:warning&gt; elements appear, benchmark consumers should 
+                        concatenate them for generating reports or documents. Benchmark consumers 
+                        may present this information in a special manner in generated 
+                        documents.</xsd:documentation>
                 </xsd:annotation>
             </xsd:element>
             <xsd:element name="reference" type="cdf:referenceType" minOccurs="0"
