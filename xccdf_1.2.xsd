@@ -57,6 +57,14 @@
         </xsd:annotation>
         <xsd:complexType>
             <xsd:sequence>
+                <xsd:element ref="cdf:security-marking" minOccurs="0" maxOccurs="1">
+                    <xsd:annotation>
+                        <xsd:documentation xml:lang="en">A security marking for the 
+                            &lt;xccdf:Benchmark&gt; suitable for use as a page header or 
+                            footer or as a screen banner, such as: UNCLASSIFIED.
+                            </xsd:documentation>
+                    </xsd:annotation>
+                </xsd:element>
                 <xsd:element ref="cdf:status" minOccurs="1" maxOccurs="unbounded">
                     <xsd:annotation>
                         <xsd:documentation xml:lang="en">Status of the &lt;xccdf:Benchmark&gt;
@@ -515,6 +523,14 @@
     <!-- ************************************************************** -->
     <!-- *************  Global elements and types  ******************** -->
     <!-- ************************************************************** -->
+    <xsd:element name="security-marking" type="cdf:securityMarkingType">
+        <xsd:annotation>
+            <xsd:documentation xml:lang="en">A security marking for the 
+                &lt;xccdf:Benchmark&gt; or its components suitable for use as a page header or 
+                footer or as a screen banner, such as: UNCLASSIFIED.</xsd:documentation>
+        </xsd:annotation>
+    </xsd:element>
+    
     <xsd:element name="status">
         <xsd:annotation>
             <xsd:documentation xml:lang="en"> The acceptance status of an element with an optional
@@ -598,6 +614,15 @@
         </xsd:simpleContent>
     </xsd:complexType>
 
+    <xsd:simpleType name="securityMarkingType">
+        <xsd:annotation>
+            <xsd:documentation xml:lang="en">The securityMarkingType the security marking of
+                an &lt;xccdf:Benchmark&gt; element or its contents as recorded by an 
+                &lt;xccdf:security-marking&gt; element.</xsd:documentation>
+        </xsd:annotation>
+        <xsd:restriction base="xsd:string">
+        </xsd:restriction>
+    </xsd:simpleType>
 
     <xsd:simpleType name="statusType">
         <xsd:annotation>
@@ -964,6 +989,14 @@
                 that element. </xsd:documentation>
         </xsd:annotation>
         <xsd:sequence>
+            <xsd:element ref="cdf:security-marking" minOccurs="0" maxOccurs="1">
+                <xsd:annotation>
+                    <xsd:documentation xml:lang="en">A security marking for the 
+                        item, suitable for use as a page header or 
+                        footer or as a screen banner, such as: UNCLASSIFIED.
+                        </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
             <xsd:element ref="cdf:status" minOccurs="0" maxOccurs="unbounded">
                 <xsd:annotation>
                     <xsd:documentation xml:lang="en">Status of the item and date at which it
@@ -2597,6 +2630,14 @@ NOT || P | F | U | E | N | K | S | I ||
                 XML-Signature. </xsd:documentation>
         </xsd:annotation>
         <xsd:sequence>
+            <xsd:element ref="cdf:security-marking" minOccurs="0" maxOccurs="1">
+                <xsd:annotation>
+                    <xsd:documentation xml:lang="en">A security marking for the 
+                        &lt;xccdf:Benchmark&gt; suitable for use as a page header or 
+                        footer or as a screen banner, such as: UNCLASSIFIED.
+                        </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
             <xsd:element ref="cdf:status" minOccurs="0" maxOccurs="unbounded">
                 <xsd:annotation>
                     <xsd:documentation xml:lang="en">Status of the &lt;xccdf:Profile&gt; and date at
@@ -2952,6 +2993,14 @@ NOT || P | F | U | E | N | K | S | I ||
                 them.</xsd:documentation>
         </xsd:annotation>
         <xsd:sequence>
+            <xsd:element ref="cdf:security-marking" minOccurs="0" maxOccurs="1">
+                <xsd:annotation>
+                    <xsd:documentation xml:lang="en">A security marking for the 
+                        &lt;xccdf:TestResult&gt; suitable for use as a page header or 
+                        footer or as a screen banner, such as: UNCLASSIFIED.
+                        </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
             <xsd:element name="benchmark" minOccurs="0" maxOccurs="1"
                 type="cdf:benchmarkReferenceType">
                 <xsd:annotation>
@@ -3343,6 +3392,14 @@ NOT || P | F | U | E | N | K | S | I ||
                 or component of a target system. </xsd:documentation>
         </xsd:annotation>
         <xsd:sequence>
+            <xsd:element ref="cdf:security-marking" minOccurs="0" maxOccurs="1">
+                <xsd:annotation>
+                    <xsd:documentation xml:lang="en">A security marking for the 
+                        &lt;xccdf:rule-result&gt; suitable for use as a page header or 
+                        footer or as a screen banner, such as: UNCLASSIFIED.
+                        </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
             <xsd:element name="result" type="cdf:resultEnumType" minOccurs="1" maxOccurs="1">
                 <xsd:annotation>
                     <xsd:documentation xml:lang="en">Result of applying the referenced
