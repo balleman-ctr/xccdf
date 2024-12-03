@@ -1,0 +1,16 @@
+<Benchmark xmlns="http://checklists.nist.gov/xccdf/1.2" id="xccdf_example_benchmark_Impact_Metric_Examples">
+	<status date="2024-12-02">draft</status>
+	<title>Impact Metric Examples</title>
+	<description>This benchmark demonstrates use of the impact-metric element.</description>
+	<version time="2024-12-02T00:00:00">0.1</version>
+	<Rule weight="4.6" id="xccdf_example_rule_1" severity="medium">
+		<version time="2024-12-02T00:00:00">1</version>
+		<title>CCSS Example</title>
+		<impact-metric system="https://doi.org/10.6028/NIST.IR.7502">AV:L/Au:N/AC:L/C:P/I:P/A:P</impact-metric>
+	</Rule>
+	<Rule weight="5.4" id="xccdf_example_rule_2" severity="medium">
+		<version time="2024-12-02T00:00:00">1</version>
+		<title>CVSS Example</title>
+		<impact-metric system="https://www.first.org/cvss/cvss-v3.1.xsd">AV:N/AC:L/PR:L/UI:R/S:C/C:L/I:L/A:N</impact-metric>
+	</Rule>		
+</Benchmark>

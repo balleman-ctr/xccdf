@@ -1270,22 +1270,11 @@
                                 &lt;xccdf:Rule&gt; assesses.</xsd:documentation>
                         </xsd:annotation>
                     </xsd:element>
-                    <xsd:element name="impact-metric" type="xsd:string" minOccurs="0" maxOccurs="1">
+                    <xsd:element name="impact-metric" type="cdf:impactMetricType" minOccurs="0" maxOccurs="unbounded">
                         <xsd:annotation>
                             <xsd:documentation xml:lang="en">The potential impact of failure to
-                                conform to the &lt;xccdf:Rule&gt;, expressed as a CVSS 2.0 base
-                                vector. </xsd:documentation>
-                            <xsd:appinfo>
-                                <deprecated_info>
-                                    <version>1.2</version>
-                                    <reason>The &lt;xccdf:impact-metric&gt; property was found to be
-                                        of little use in the anticipated XCCDF use-cases.</reason>
-                                    <comment>While there is no direct replacement for this property,
-                                        authors seeking to include equivalent information can use an
-                                        &lt;xccdf:Rule&gt; element's &lt;xccdf:metadata&gt; property
-                                        to hold this information.</comment>
-                                </deprecated_info>
-                            </xsd:appinfo>
+                                conform to the &lt;xccdf:Rule&gt;, such as a CVSS base
+                                vector.</xsd:documentation>
                         </xsd:annotation>
                     </xsd:element>
                     <xsd:element name="profile-note" minOccurs="0" type="cdf:profileNoteType"
@@ -1422,6 +1411,41 @@
             </xsd:extension>
         </xsd:simpleContent>
     </xsd:complexType>
+
+    <xsd:complexType name="impactMetricType">
+        <xsd:annotation>
+            <xsd:documentation xml:lang="en">The potential impact of failure to
+                conform to the &lt;xccdf:Rule&gt;, such as a CVSS base vector. It has an 
+                associated URI that denotes the scoring system or scheme used to define this 
+                metric.</xsd:documentation>
+        </xsd:annotation>
+        <xsd:simpleContent>
+            <xsd:extension base="xsd:string">
+                <xsd:attribute name="system" type="xsd:anyURI" use="required">
+                    <xsd:annotation>
+                        <xsd:documentation xml:lang="en">Denotes the scoring system or 
+                        scheme that is used to define this metric. If the system uses XML 
+                        namespaces, then the system attribute for the system should be its 
+                        namespace. The following are a list of common scoring systems and 
+                        recommended URIs: Common Vulnerability Scoring System (CVSS) v2.0 
+                        (http://scap.nist.gov/schema/cvss-v2/0.2), CVSS v3.0 
+                        (https://www.first.org/cvss/cvss-v3.0.xsd), CVSS v3.1 
+                        (https://www.first.org/cvss/cvss-v3.1.xsd), CVSS v4.0 
+                        (https://www.first.org/cvss/cvss-v4.0.xsd), and Common Configuration 
+                        Scoring System (CCSS) (https://doi.org/10.6028/NIST.IR.7502).
+                        </xsd:documentation>
+                    </xsd:annotation>
+                </xsd:attribute>
+                <xsd:anyAttribute namespace="##other" processContents="lax">
+                    <xsd:annotation>
+                        <xsd:documentation xml:lang="en">May also have other attributes from other
+                            namespaces in order to provide additional metadata for the given
+                            metric. </xsd:documentation>
+                    </xsd:annotation>
+                </xsd:anyAttribute>
+            </xsd:extension>
+        </xsd:simpleContent>
+    </xsd:complexType>	
 
     <xsd:complexType name="warningType" mixed="true">
         <xsd:annotation>
