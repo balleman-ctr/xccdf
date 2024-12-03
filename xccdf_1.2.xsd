@@ -616,8 +616,8 @@
 
     <xsd:simpleType name="securityMarkingType">
         <xsd:annotation>
-            <xsd:documentation xml:lang="en">The securityMarkingType the security marking of
-                an &lt;xccdf:Benchmark&gt; element or its contents as recorded by an 
+            <xsd:documentation xml:lang="en">The security marking of an
+                &lt;xccdf:Benchmark&gt; element or its contents as recorded by an 
                 &lt;xccdf:security-marking&gt; element.</xsd:documentation>
         </xsd:annotation>
         <xsd:restriction base="xsd:string">
