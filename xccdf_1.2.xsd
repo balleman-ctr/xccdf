@@ -1319,8 +1319,8 @@
                     <xsd:element name="checktext" type="cdf:checkTextType" minOccurs="0"
                         maxOccurs="unbounded">
                         <xsd:annotation>
-                            <xsd:documentation xml:lang="en">Data that describes how to assess a
-                                target system for compliance with this
+                            <xsd:documentation xml:lang="en">Data that describes how to manually 
+                                assess a target system for compliance with this
                                 &lt;xccdf:Rule&gt;.</xsd:documentation>
                         </xsd:annotation>
                     </xsd:element>
@@ -1518,11 +1518,12 @@
 
     <xsd:complexType name="checkTextType" mixed="true">
         <xsd:annotation>
-            <xsd:documentation xml:lang="en"> Data type for the &lt;xccdf:checktext&gt; element, which
-                contains data that describes how to assess a target system for compliance with an
-                &lt;xccdf:Rule&gt;. Each &lt;xccdf:checktext&gt; element may be associated with one or
-                more &lt;xccdf:check&gt; elements through the @checkref attribute. The body holds
-                explanatory text about the check procedures.</xsd:documentation>
+            <xsd:documentation xml:lang="en">Data type for the &lt;xccdf:checktext&gt; element, 
+                which contains data that describes how to manually assess a target system for 
+                compliance with an &lt;xccdf:Rule&gt;. Each &lt;xccdf:checktext&gt; element may be 
+                associated with one or more &lt;xccdf:check&gt; elements through the @checkref 
+                attribute. The body holds explanatory text about the check 
+                procedures.</xsd:documentation>
         </xsd:annotation>
         <xsd:complexContent>
             <xsd:extension base="cdf:htmlTextWithSubType">
