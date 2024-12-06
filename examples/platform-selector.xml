@@ -1,0 +1,18 @@
+<Benchmark xmlns="http://checklists.nist.gov/xccdf/1.2" id="xccdf_example_benchmark_Platform_Selector_Examples">
+	<status date="2024-12-06">draft</status>
+	<title>Platform Selector Examples</title>
+	<description>This benchmark demonstrates use of the proposed selectors on platforms.</description>
+	<version time="2024-12-06T00:00:00">0.1</version>
+	<Rule weight="4.6" id="xccdf_example_rule_1" severity="medium">
+		<version time="2024-12-02T00:00:00">1</version>
+		<title>Rule with checks selected by platform</title>
+        <platform idref="cpe:/o:microsoft:windows_10" selector="windows_10"/>
+        <platform idref="cpe:/o:microsoft:windows_11" selector="windows_11"/>        
+        <check system="http://oval.mitre.org/XMLSchema/oval-definitions-5" selector="windows_10">
+            <check-content-ref name="oval:example:def:3934" href="oval.xml"/>
+        </check>
+        <check system="http://oval.mitre.org/XMLSchema/oval-definitions-5" selector="windows_11">
+            <check-content-ref name="oval:example:def:3935" href="oval.xml"/>
+        </check>
+	</Rule>
+</Benchmark>
