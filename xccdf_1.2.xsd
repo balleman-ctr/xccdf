@@ -918,6 +918,12 @@
                     although this is less preferred.</xsd:documentation>
             </xsd:annotation>
         </xsd:attribute>
+        <xsd:attribute name="selector" type="xsd:string" use="optional">
+            <xsd:annotation>
+                <xsd:documentation xml:lang="en">When selector is specified and this platform is the 
+                applicable target platform, this selector shall be set.</xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
     </xsd:complexType>
 
     <xsd:complexType name="overrideableCPE2idrefType">
