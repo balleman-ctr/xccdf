@@ -1,0 +1,43 @@
+<Benchmark xmlns="http://checklists.nist.gov/xccdf/1.2" id="xccdf_example_benchmark_Target_Specification_Examples">
+	<status date="2024-12-12">draft</status>
+	<title>Target Specification Examples</title>
+	<description>This benchmark demonstrates use of target-specification.</description>
+    <target-specification>
+        <target id="xccdf_example_target_Users">
+            <title>Target each user account on the system</title>
+            <description>
+            This target will be run on each user account on the system.  
+            The enumeration element refers to a Value with each account.  
+            The instance element refers to a Value to be set to the specific account 
+            when evaluating one target instance, for passing to the check system.
+            </description>
+            <enumeration value-id="xccdf_example_value_Target_User_Account_Enumeration"/>
+            <instance value-id="xccdf_example_value_Target_User_Account_Instance"/>
+        </target>
+    </target-specification>
+	<version time="2024-12-12T00:00:00">0.1</version>    
+    <Value id="xccdf_example_value_Target_User_Account_Enumeration">
+        <title>Target User Account Enumeration</title>
+        <description>The revised source element allows retreiving a variable from OVAL, in this case, a list of all user accounts.</description>
+        <complex-value />
+        <source system="http://oval.mitre.org/XMLSchema/oval-definitions-5" href="target-oval.xml" name="oval:example:var:12"/>
+    </Value>
+    <Value id="xccdf_example_value_Target_User_Account_Instance">
+        <title>Target User Account Instance</title>
+        <description>This Value stub will be populated with a specific user account as each are separately evaluated in the Group using the associated target platform.</description>
+        <value />
+    </Value>
+    <Group id="xccdf_example_group_1">
+        <title>Rules for each User Account</title>
+        <description>The rules in this group are evaluated once for each user account on the system.</description>
+        <platform idref="#xccdf_example_target_Users"/>
+        <Rule weight="4.6" id="xccdf_example_rule_1" severity="medium">
+            <version time="2024-12-02T00:00:00">1</version>
+            <title>User Account must not have an empty password</title>
+            <check system="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+                <check-export value-id="xccdf_example_value_Target_User_Account_Instance" export-name="oval:example:var:14"/>
+                <check-content-ref href="check-oval.xml" name="oval:example:def:100" />
+            </check>
+        </Rule>
+    </Group>
+</Benchmark>
