@@ -1,0 +1,57 @@
+<Benchmark xmlns="http://checklists.nist.gov/xccdf/1.2" id="xccdf_example_benchmark_Target_Specification_Examples">
+	<status date="2024-12-13">draft</status>
+	<title>Nested Target Specification Examples</title>
+	<description>This benchmark demonstrates use of target-specification with nested targets.</description>
+    <target-specification>
+        <target id="xccdf_example_target_Apache_Server">
+            <title>Target each instance of the Apache web server on the system</title>
+            <enumeration value-id="xccdf_example_value_Target_Apache_Server_Enumeration"/>
+            <instance value-id="xccdf_example_value_Target_Apache_Server_Instance"/>
+        </target>
+        <target id="xccdf_example_target_Apache_Site">
+            <title>Target each site of a specific Apache web server on the system</title>
+            <enumeration value-id="xccdf_example_value_Target_Apache_Site_Enumeration"/>
+            <instance value-id="xccdf_example_value_Target_Apache_Site_Instance"/>
+        </target>        
+    </target-specification>
+	<version time="2024-12-13T00:00:00">0.1</version>    
+    <Value id="xccdf_example_value_Target_Apache_Server_Enumeration">
+        <title>Target Apache Server Enumeration</title>
+        <complex-value />
+        <source system="http://oval.mitre.org/XMLSchema/oval-definitions-5" href="target-oval.xml" name="oval:example:var:1"/>
+    </Value>
+    <Value id="xccdf_example_value_Target_Apache_Server_Instance">
+        <title>Target Apache Server Instance</title>
+        <value />
+    </Value>
+    <Value id="xccdf_example_value_Target_Apache_Site_Enumeration">
+        <title>Target Apache Site Enumeration</title>
+        <complex-value />
+        <source system="http://oval.mitre.org/XMLSchema/oval-definitions-5" href="target-oval.xml" name="oval:example:var:2">
+            <check-export value-id="xccdf_example_value_Target_Apache_Server_Instance" export-name="oval:example:var:10"/>
+        </source>
+    </Value>
+    <Value id="xccdf_example_value_Target_Apache_Site_Instance">
+        <title>Target Apache Site Instance</title>
+        <value />
+    </Value>
+    <Group id="xccdf_example_group_1">
+        <title>Apache Server</title>
+        <description>This group is evaluated once for each Apache Server instance on the system.</description>
+        <platform idref="#xccdf_example_target_Apache_Server"/>
+        <Group id="xccdf_example_group_2">
+            <title>Apache Site</title>
+            <description>This group is evaluated once for each Apache Site instance for a specific Apache Server instance.</description>
+            <platform idref="#xccdf_example_target_Apache_Site"/>
+            <Rule weight="4.6" id="xccdf_example_rule_1" severity="medium">
+                <version time="2024-12-02T00:00:00">1</version>
+                <title>The web site must have certain restrictions in place</title>
+                <check system="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+                    <check-export value-id="xccdf_example_value_Target_Apache_Server_Instance" export-name="oval:example:var:10"/>
+                    <check-export value-id="xccdf_example_value_Target_Apache_Site_Instance" export-name="oval:example:var:11"/>
+                    <check-content-ref href="check-oval.xml" name="oval:example:def:100" />
+                </check>
+            </Rule>
+        </Group>
+    </Group>
+</Benchmark>
