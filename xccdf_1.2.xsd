@@ -2577,6 +2577,17 @@ NOT || P | F | U | E | N | K | S | I ||
             <xsd:documentation xml:lang="en"> Data type of &lt;xccdf:source&gt; for Values. 
             In the case of OVAL, name represents a variable id, the values of which will be collected.</xsd:documentation>
         </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element name="check-export" type="cdf:checkExportType" minOccurs="0"
+                maxOccurs="unbounded">
+                <xsd:annotation>
+                    <xsd:documentation xml:lang="en">A mapping from an &lt;xccdf:Value&gt; element
+                        to a checking system variable (i.e., external name or id for use by the
+                        checking system). This supports export of tailoring or instance values from 
+                        the XCCDF processing environment to the checking system.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+        </xsd:sequence>
         <xsd:attribute name="system" type="xsd:anyURI" use="required"/>
         <xsd:attribute name="href" type="xsd:anyURI" use="required"/>
         <xsd:attribute name="name" type="xsd:token" use="required"/>
