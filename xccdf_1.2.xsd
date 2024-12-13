@@ -124,7 +124,7 @@
                         <xsd:documentation xml:lang="en">Definitions for reusable text blocks, each
                             with a unique identifier.</xsd:documentation>
                     </xsd:annotation>
-                </xsd:element>
+                </xsd:element>       
                 <xsd:element ref="cpe2:platform-specification" minOccurs="0" maxOccurs="1">
                     <xsd:annotation>
                         <xsd:documentation xml:lang="en">A list of identifiers for complex platform
@@ -132,6 +132,15 @@
                             define complex platforms within this element, and then use their locally
                             unique identifiers anywhere in the &lt;xccdf:Benchmark&gt; element in
                             place of a CPE name.</xsd:documentation>
+                    </xsd:annotation>
+                </xsd:element>
+                <xsd:element name="target-specification" type="cdf:targetSpecificationType" minOccurs="0"
+                    maxOccurs="1">
+                    <xsd:annotation>
+                        <xsd:documentation xml:lang="en">A list of targets used to enumerate multi-instance
+                            components to be checked on the system.  Their identifiers can be used anywhere 
+                            in the &lt;xccdf:Benchmark&gt; element in place of a CPE 
+                            name.</xsd:documentation>
                     </xsd:annotation>
                 </xsd:element>
                 <xsd:element name="platform" type="cdf:CPE2idrefType" minOccurs="0"
@@ -850,6 +859,17 @@
             <xsd:pattern value="xccdf_[^_]+_profile_.+"/>
         </xsd:restriction>
     </xsd:simpleType>
+    
+    <xsd:simpleType name="targetIdType">
+        <xsd:annotation>
+            <xsd:documentation xml:lang="en"> The format required for the @id property of
+                &lt;xccdf:target&gt; elements. xccdf_N_target_S, where N is a reverse-DNS style
+                namespace and S is an NCName-compatible string. </xsd:documentation>
+        </xsd:annotation>
+        <xsd:restriction base="xsd:NCName">
+            <xsd:pattern value="xccdf_[^_]+_target_.+"/>
+        </xsd:restriction>
+    </xsd:simpleType>
 
     <xsd:simpleType name="testresultIdType">
         <xsd:annotation>
@@ -911,9 +931,8 @@
             <xsd:annotation>
                 <xsd:documentation xml:lang="en">Should be a CPE 2.3 Applicability Language
                     identifier using the Formatted String binding or the value of a
-                    &lt;cpe:platform-specification&gt; element's @id attribute, the latter acting as
-                    a reference to some expression defined using the CPE schema in the
-                    &lt;xccdf:Benchmark&gt; element's &lt;cpe:platform-specification&gt; element.
+                    &lt;cpe:platform-specification&gt; element's @id attribute, or the value of a 
+                    &lt;xccdf:target&gt; element's @id attribute.
                     The @idref may be a CPE Applicability Language identifier using the URI binding,
                     although this is less preferred.</xsd:documentation>
             </xsd:annotation>
@@ -2236,14 +2255,10 @@ NOT || P | F | U | E | N | K | S | I ||
                                 tailoring and document generation. </xsd:documentation>
                         </xsd:annotation>
                     </xsd:element>
-                    <xsd:element name="source" type="cdf:uriRefType" minOccurs="0"
+                    <xsd:element name="source" type="cdf:sourceType" minOccurs="0"
                         maxOccurs="unbounded">
                         <xsd:annotation>
-                            <xsd:documentation xml:lang="en">URI indicating where the tool may
-                                acquire values, value bounds, or value choices for this
-                                &lt;xccdf:Value&gt; element. XCCDF does not attach any meaning to
-                                the URI; it may be an arbitrary community or tool-specific value, or
-                                a pointer directly to a resource. If several instances of the
+                            <xsd:documentation xml:lang="en">If several instances of the
                                 &lt;xccdf:source&gt; property appear, then they represent
                                 alternative means or locations for obtaining the value in descending
                                 order of preference (i.e., most preferred first).
@@ -2556,6 +2571,16 @@ NOT || P | F | U | E | N | K | S | I ||
             </xsd:enumeration>
         </xsd:restriction>
     </xsd:simpleType>
+    
+    <xsd:complexType name="sourceType">
+        <xsd:annotation>
+            <xsd:documentation xml:lang="en"> Data type of &lt;xccdf:source&gt; for Values. 
+            In the case of OVAL, name represents a variable id, the values of which will be collected.</xsd:documentation>
+        </xsd:annotation>
+        <xsd:attribute name="system" type="xsd:anyURI" use="required"/>
+        <xsd:attribute name="href" type="xsd:anyURI" use="required"/>
+        <xsd:attribute name="name" type="xsd:token" use="required"/>
+    </xsd:complexType>    
 
     <!-- ************************************************************** -->
     <!-- *******************  Profile Element  ************************ -->
@@ -2919,6 +2944,91 @@ NOT || P | F | U | E | N | K | S | I ||
             </xsd:annotation>
         </xsd:attribute>
     </xsd:complexType>
+    
+    <!-- ************************************************************** -->
+    <!-- *********************  Target Element  *********************** -->
+    <!-- ************************************************************** -->
+    <xsd:complexType name="targetSpecificationType">
+        <xsd:annotation>
+            <xsd:documentation xml:lang="en"> Data type for the 
+            &lt;target-specifiction&gt; element which contains a list of targets 
+            that may be referened within the benchmark.</xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element name="target" minOccurs="0" maxOccurs="unbounded"
+                type="cdf:targetType">
+                <xsd:annotation>
+                    <xsd:documentation xml:lang="en">Definition of a
+                    target which enumerates specific system components for 
+                    multi-instance scanning.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+        </xsd:sequence>
+    </xsd:complexType>
+    
+    <xsd:complexType name="targetType">
+        <xsd:annotation>
+            <xsd:documentation xml:lang="en"> Data type for the 
+            &lt;target&gt; element which enumerates specific system
+            components for multi-instance scanning.</xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element name="title" type="cdf:textType" minOccurs="0" maxOccurs="unbounded">
+                <xsd:annotation>
+                    <xsd:documentation xml:lang="en">Title of the &lt;xccdf:target&gt;; an
+                        &lt;xccdf:target&gt; should have an
+                        &lt;xccdf:title&gt;.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="description" type="cdf:htmlTextWithSubType" minOccurs="0"
+                maxOccurs="unbounded">
+                <xsd:annotation>
+                    <xsd:documentation xml:lang="en">Text that describes the
+                        &lt;xccdf:target&gt;; an &lt;xccdf:target&gt; should have an
+                        &lt;xccdf:description&gt;.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="metadata" type="cdf:metadataType" minOccurs="0" maxOccurs="unbounded">
+                <xsd:annotation>
+                    <xsd:documentation xml:lang="en">XML metadata associated with this
+                        &lt;xccdf:target&gt;. </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="enumeration" type="cdf:targetValueType" minOccurs="1" maxOccurs="1">
+                <xsd:annotation>
+                    <xsd:documentation xml:lang="en">The Value to be used as the list of 
+                    enumerated instances of system components to be scanned for this target.
+                    For example, a list of system accounts. </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="instance" type="cdf:targetValueType" minOccurs="1" maxOccurs="1">
+                <xsd:annotation>
+                    <xsd:documentation xml:lang="en">The Value set to a specific item of the 
+                    enumeration when scanning a specific instance of this target. The value
+                    is intended to be exported to a checking system to facilitate checking
+                    of the specific target instance.  For example, one specific system account.</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>             
+        </xsd:sequence>
+        <xsd:attribute name="id" type="cdf:targetIdType" use="required">
+            <xsd:annotation>
+                <xsd:documentation xml:lang="en">Unique identifier for this
+                    &lt;xccdf:target&gt;.</xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>        
+    </xsd:complexType>
+    
+    <xsd:complexType name="targetValueType">
+        <xsd:annotation>
+            <xsd:documentation xml:lang="en"></xsd:documentation>
+        </xsd:annotation>
+        <xsd:attribute name="value-id" type="xsd:NCName" use="required">
+            <xsd:annotation>
+                <xsd:documentation xml:lang="en">The id of the &lt;xccdf:Value&gt; element to
+                    export. </xsd:documentation>
+            </xsd:annotation>
+        </xsd:attribute>
+    </xsd:complexType>    
 
     <!-- ************************************************************** -->
     <!-- *******************  TestResult Element  ********************* -->

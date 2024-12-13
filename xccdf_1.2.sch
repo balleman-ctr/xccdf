@@ -230,7 +230,7 @@
     </sch:pattern>
     <sch:pattern id="benchmark_platform_invalid_prefix">
         <sch:rule context="xccdf:platform[not(starts-with(@idref,'cpe:/') or starts-with(@idref,'cpe:2.3:') or starts-with(@idref,'#'))]">
-            <sch:assert flag="WARNING" test="false()">Warning: The @idref attribute of a 'platform' element must begin with 'cpe:/' (CPE name version 2.2 and earlier),'cpe:2.3:' (CPE name version 2.3), or '#' (followed by the @id value of a CPE 'platform-specification' element). See the XCCDF 1.2.1 specification, Section 6.2.5.</sch:assert>    
+            <sch:assert flag="WARNING" test="false()">Warning: The @idref attribute of a 'platform' element must begin with 'cpe:/' (CPE name version 2.2 and earlier),'cpe:2.3:' (CPE name version 2.3), or '#' (followed by the @id value of a CPE 'platform-specification' or xccdf:target element). See the XCCDF 1.2.1 specification, Section 6.2.5.</sch:assert>
         </sch:rule>
     </sch:pattern>
     <sch:pattern id="benchmark_platform_prefix_deprecated">
@@ -241,7 +241,7 @@
     <sch:pattern id="benchmark_platform_specification_exists">
         <sch:rule context="xccdf:platform[starts-with(@idref,'#')]">
             <sch:let name="platformid" value="substring-after(@idref,'#')"/>
-            <sch:assert flag="WARNING" test="./ancestor::xccdf:Benchmark/cpe2:platform-specification/cpe2:platform[@id = $platformid]">Warning: No matching 'platform' element with an @id of '<sch:value-of select="$platformid"/>' found within a 'platform-specification' element of the 'Benchmark' element. See the XCCDF 1.2.1 specification, Section 6.2.5.</sch:assert>
+            <sch:assert flag="WARNING" test="./ancestor::xccdf:Benchmark/cpe2:platform-specification/cpe2:platform[@id = $platformid] or ./ancestor::xccdf:Benchmark/xccdf:target-specification/xccdf:target[@id = $platformid]">Warning: No matching 'platform' or 'target' element with an @id of '<sch:value-of select="$platformid"/>' found within a 'platform-specification' or 'target-specification' element, respectively, of the 'Benchmark' element. See the XCCDF 1.2.1 specification, Section 6.2.5.</sch:assert>
         </sch:rule>
     </sch:pattern>
     <sch:pattern id="benchmark_platform_exists">
